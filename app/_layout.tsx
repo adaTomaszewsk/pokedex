@@ -17,6 +17,7 @@ export default function RootLayout() {
         title: "Details",
         headerBackButtonDisplayMode: "minimal",
         headerShown: false,
+        
       }}>
       </Stack.Screen>
     </Stack>
