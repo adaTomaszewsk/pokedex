@@ -2,7 +2,7 @@ import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ColorsByType } from "./constants/colors";
+import { ColorsByType } from "./src/constants/colors";
 import { Pokemon } from "./types/pokemon";
 
 export default function Index() {
@@ -135,4 +135,3 @@ const styles = StyleSheet.create({
   }
 }
 );
-
