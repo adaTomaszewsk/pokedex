@@ -26,7 +26,7 @@ export default function Details() {
       try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
       const data = await response.json();
-
+      
       const mappedPokemon: Pokemon = {
         id: data.id,
         name: data.name,
@@ -54,7 +54,6 @@ export default function Details() {
         egg_groups: data.egg_groups || [],
       };
       setPokemon(mappedPokemon);
-      //console.log(mappedPokemon);
       }catch(e){
         console.log(e);
       }
@@ -77,7 +76,7 @@ export default function Details() {
           }}>
 
           
-        <Tabs activeCard={activeCard} setActiveCard={setActiveCard} />
+        <Tabs activeCard={activeCard} setActiveCard={setActiveCard}/>
         {activeCard === "about" && <AboutTab pokemon={pokemon}/>}
 
         {activeCard === "stats" && <StatsTab pokemon={pokemon}/>}

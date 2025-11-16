@@ -6,7 +6,7 @@ export default function Tabs({activeCard, setActiveCard}){
       {["about", "stats", "evolution", "moves"].map((tab) => (
         <Text
           key={tab}
-          style={[styles.tab, activeCard === tab && styles.active]}
+          style={[styles.tabButton, activeCard === tab && styles.activeTab]}
           onPress={() => setActiveCard(tab)}
         >
           {tab.charAt(0).toUpperCase() + tab.slice(1)}

@@ -1,9 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import styles from "./styles";
 
 export default function AboutTab({pokemon}) {
   return (
     <View style={styles.container}>
-
+      <View style={styles.row}>
+        <Text style={styles.label}>Pokedex number:</Text>
+        <Text style={styles.value}>{pokemon.id}</Text>
+      </View>
       <View style={styles.row}>
         <Text style={styles.label}>Height:</Text>
         <Text style={styles.value}>{pokemon.height}</Text>
@@ -21,33 +25,9 @@ export default function AboutTab({pokemon}) {
             </Text>
           ))}
         </View>
+  
       </View>
+
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    marginTop: 10,
-    gap: 12,
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    width: "100%"
-  },
-  label: {
-    width: "40%",
-    color: "#777",
-    fontWeight: "600",
-    fontSize: 16,
-  },
-  value: {
-    width: "60%",
-    color: "#333",
-    fontSize: 16,
-    fontWeight: "500"
-  }
-}
-);
