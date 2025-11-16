@@ -34,6 +34,7 @@ export type Pokemon = {
   abilites: Ability[];
   gender_rate: number;
   egg_groups: EggGroup[];
+  species: string;
 };
 
 export default Pokemon;

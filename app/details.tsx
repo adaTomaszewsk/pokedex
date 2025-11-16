@@ -1,13 +1,19 @@
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
-import { ColorsByType } from "./src/constants/colors";
+import { Text, View } from "react-native";
+import PokemonHeader from "./src/details/PokemonHeader";
+import AboutTab from "./src/details/tabs/AboutTab";
+import EvolutionTab from "./src/details/tabs/EvolutionTab";
+import MovesTab from "./src/details/tabs/MovesTab";
+import StatsTab from "./src/details/tabs/StatsTab";
+import Tabs from "./src/details/tabs/Tabs";
 import { Pokemon } from "./types/pokemon";
 
 
 export default function Details() {
     const params = useLocalSearchParams();
     const [pokemon, setPokemon] = useState<Pokemon[]>(null);
+    const [activeCard, setActiveCard] = useState<"about" | "stats" | "evolution" | "moves">("about");
 
     useEffect(()=> {
       if (params.name) {
@@ -59,52 +65,29 @@ export default function Details() {
     }
 
     return (
-     <>
-        <View style={{paddingTop: 70, paddingHorizontal:16,  backgroundColor: ColorsByType[pokemon.types[0].name] +50}}>
-          <Text style={styles.title}>{params.name.charAt(0).toUpperCase() + params.name.slice(1)}</Text>
-          <View style={{ flexDirection: 'row', gap: 8, justifyContent: 'flex-start',alignItems: 'flex-start', marginTop:16,}}>
-            {pokemon.types.map((typeItem, index) => (
-              <View key={index} style={styles.circle}>
-                <Text style={styles}>{typeItem.name.charAt(0).toUpperCase() + typeItem.name.slice(1)}</Text>
-              </View>
-            ))}
-          </View>
-          <View style={{ alignItems: "center" }}>
-            <Image
-              source={{ uri: pokemon?.image }}
-              style={{ width: 160, height: 160 }}
-              resizeMode="contain"
-            />
-          </View>
-        </View>
+      <>
+        <PokemonHeader pokemon={pokemon}/>
         <View style={{
-        flex:1,
-        backgroundColor: "white",
-        padding: 16,
-        borderTopLeftRadius: 24, 
-        borderTopRightRadius: 24, 
-        marginTop: -30,
-        }}>
-          <Text style={styles.title}>{params.name.charAt(0).toUpperCase() + params.name.slice(1)}</Text>
+          flex:1,
+          backgroundColor: "white",
+          padding: 16,
+          borderTopLeftRadius: 40, 
+          borderTopRightRadius: 40, 
+          marginTop: -30,
+          }}>
+
+          
+        <Tabs activeCard={activeCard} setActiveCard={setActiveCard} />
+        {activeCard === "about" && <AboutTab pokemon={pokemon}/>}
+
+        {activeCard === "stats" && <StatsTab pokemon={pokemon}/>}
+
+          {activeCard === "evolution" && <EvolutionTab pokemon={pokemon}/>}
+
+          {activeCard === "moves" && <MovesTab pokemon={pokemon}/>}
+
         </View>
-     </>
+    </>
   );
 }
-  const styles = StyleSheet.create({
-    title: {
-      color: "white",
-      fontSize: 28,
-      fontWeight: "bold",
-
-    },
-     circle: {
-    width: 80,
-    height: 30,
-    borderRadius: 40,
-    alignItems: "center",
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    justifyContent: "center",
-  }
-  }
-);
 
